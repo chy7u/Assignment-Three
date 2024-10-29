@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculation Forms</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <script defer src="script.js"></script>
+    <div class="container">
+      <div class="card">
+        <h3>Heron's Formula</h3>
+        <label>Side A:</label>
+        <input type="number" id="sideA" placeholder="Enter side A" />
+        <label>Side B:</label>
+        <input type="number" id="sideB" placeholder="Enter side B" />
+        <label>Side C:</label>
+        <input type="number" id="sideC" placeholder="Enter side C" />
+        <label>Area (Result):</label>
+        <input type="text" id="heronsResult" disabled />
+        <button id="calculateHeron">Calculate</button>
+      </div>
+
+      <div class="card">
+        <h3>Ambiguous Case</h3>
+        <label>Angle A:</label>
+        <input type="number" placeholder="Enter angle A" />
+        <label>Side a:</label>
+        <input type="number" placeholder="Enter side a" />
+        <label>Side b:</label>
+        <input type="number" placeholder="Enter side b" />
+        <label>Triangle Type (Result):</label>
+        <input type="text" disabled />
+        <button>Calculate</button>
+      </div>
+
+      <div class="card">
+        <h3>Newton's Method</h3>
+        <label>Root Guess:</label>
+        <input type="number" placeholder="Enter root guess" />
+        <label>Root Approximation (Result):</label>
+        <input type="text" disabled />
+        <button>Calculate</button>
+      </div>
+
+      <div class="card">
+        <h3>Polynomial Function</h3>
+        <label>Coefficients:</label>
+        <input type="text" placeholder="Enter coefficients" />
+        <label>Exponents:</label>
+        <input type="text" placeholder="Enter exponents" />
+        <label>x Value:</label>
+        <input type="number" placeholder="Enter x value" />
+        <label>Polynomial Function (Result):</label>
+        <input type="text" disabled />
+        <label>Polynomial Evaluation (Result):</label>
+        <input type="text" disabled />
+        <button>Calculate</button>
+      </div>
+    </div>
+  </body>
+</html>
