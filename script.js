@@ -77,3 +77,19 @@ document
 
     document.getElementById("ambiguousResult").value = ambiguousCase(angleA, a, b);
   });
+
+//Newton's Method
+
+const newtonsMethod = (g) => {
+  function f(x) {
+    return 6*x**4 - 13*x**3 - 18*x**2 + 7*x + 6;
+  }
+
+  function fDeriv(x) {
+    return 24*x**3 - 39*x**2 - 36*x;
+  }
+
+  const x1 = g - f(x)/fDerive(x);
+  
+
+}
