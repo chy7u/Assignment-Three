@@ -89,7 +89,34 @@ const newtonsMethod = (g) => {
     return 24*x**3 - 39*x**2 - 36*x;
   }
 
-  const x1 = g - f(x)/fDerive(x);
-  
+  const rootApprox = (x) => {
+    const x1 = x - f(x)/fDeriv(x); //this is the new root
+    const difference = x - x1;
+    const rootDifference = [x1, difference];
+    return rootDifference;
+  }
+
+  let differenceTracker = 0;
+  const result = rootApprox(g);
+  result.shift();
+  differenceTracker = result.pop();
+  console.log(differenceTracker);
+  //do {
+    //const result = rootApprox(g);
+    //result.shift();
+    //differenceTracker = result.pop();
+  //} while (differenceTracker > 0.001 || differenceTracker < -0.001);
+
+  console.log(rootApprox(g));
+//  while (differenceTracker > 0.01) {
+//    rootApprox(g) 
+//  }
 
 }
+
+document.getElementById("calculateNewtons").addEventListener("click", function() {
+  
+  const root = document.getElementById("root").value;
+
+  document.getElementById("newtonsResult").value = newtonsMethod(root);
+});
