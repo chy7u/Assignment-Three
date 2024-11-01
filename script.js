@@ -36,7 +36,7 @@ function ambiguousCase(angleA, a, b) {
   var h = b * Math.sin(angleRadians);
 
   if (angleA <= 90) {
-    console.log('a: ' + a + ' h: ' + h)
+    console.log("a: " + a + " h: " + h);
     if (a < h) {
       return "No triangle.";
     } else if (a == h) {
@@ -44,18 +44,18 @@ function ambiguousCase(angleA, a, b) {
       return "Right triangle.";
     } else if (a > h) {
       return "One triangle.";
-    } else if ((a > h) && (a < b)) {
+    } else if (a > h && a < b) {
       return "Two triangles (ambiguous case).";
     } else {
-        return 'No solution.'
+      return "No solution.";
     }
   } else if (angleA <= 180) {
-    if ((a < h) || (a == h)) {
+    if (a < h || a == h) {
       return "No triangle.";
     }
     return "One triangle.";
   } else {
-    return 'No solution.'
+    return "No solution.";
   }
 }
 
@@ -75,48 +75,97 @@ document
       return;
     }
 
-    document.getElementById("ambiguousResult").value = ambiguousCase(angleA, a, b);
+    document.getElementById("ambiguousResult").value = ambiguousCase(
+      angleA,
+      a,
+      b
+    );
   });
 
 //Newton's Method
 
 const newtonsMethod = (g) => {
   function f(x) {
-    return 6*x**4 - 13*x**3 - 18*x**2 + 7*x + 6;
+    return 6 * x ** 4 - 13 * x ** 3 - 18 * x ** 2 + 7 * x + 6;
   }
 
   function fDeriv(x) {
-    return 24*x**3 - 39*x**2 - 36*x;
+    return 24 * x ** 3 - 39 * x ** 2 - 36 * x;
   }
 
-  const rootApprox = (x) => {
-    const x1 = x - f(x)/fDeriv(x); //this is the new root
-    const difference = x - x1;
-    const rootDifference = [x1, difference];
-    return rootDifference;
-  }
+  //const rootApprox = (x) => {
+  //  const x1 = x - f(x)/fDeriv(x); //this is the new root
+  //  return x1;
+  //}
 
-  let differenceTracker = 0;
-  const result = rootApprox(g);
-  result.shift();
-  differenceTracker = result.pop();
-  console.log(differenceTracker);
-  //do {
-    //const result = rootApprox(g);
-    //result.shift();
-    //differenceTracker = result.pop();
-  //} while (differenceTracker > 0.001 || differenceTracker < -0.001);
+  var previousGuess = g;
+  var newRoot = null;
+  var rootGuess = false;
 
-  console.log(rootApprox(g));
-//  while (differenceTracker > 0.01) {
-//    rootApprox(g) 
-//  }
+  do {
+    const rootApprox = (x) => {
+      newRoot = x - f(x) / fDeriv(x);
+      return newRoot;
+    };
 
-}
+    if (
+      previousGuess - rootApprox(previousGuess) > 0.0001 ||
+      previousGuess - rootApprox(previousGuess) < -0.0001
+    ) {
+      previousGuess = rootApprox(newRoot);
+    } else {
+      rootGuess = true;
+      return rootApprox(previousGuess);
+    }
+  } while (rootGuess == false);
+  //  while (differenceTracker > 0.01) {
+  //    rootApprox(g)
+  //  }
+};
 
-document.getElementById("calculateNewtons").addEventListener("click", function() {
+document
+  .getElementById("calculateNewtons")
+  .addEventListener("click", function () {
+    const root = document.getElementById("root").value;
+
+    document.getElementById("newtonsResult").value = newtonsMethod(root);
+  });
+
+//Polynomial Function
+
+const polynomialFunction = (coeff, exp) => {
+
+  const coeffArray = coeff.split(" ");
+  const expArray = exp.split(" ");
   
-  const root = document.getElementById("root").value;
+  const expMap = expArray.map((exp) => {
+    return "x^" + exp;
+  });
 
-  document.getElementById("newtonsResult").value = newtonsMethod(root);
+  const coeffMap = coeffArray.map((coeff) => {
+    if (coeff == coeffArray[0]) {
+      return coeff;
+    } else {
+      if (coeff > 0) {
+        return "+" + coeff;
+      } else if (coeff <0) {
+        return "-" + coeff;
+      } else {
+        return "0";
+      }
+    }
+
+  });
+
+  console.log(coeffArray, expArray, expMap, coeffMap);
+
+};
+
+document.getElementById("calculatePolynomial").addEventListener("click", function() {
+  const coefficients = document.getElementById("coefficients").value;
+  const exponents = document.getElementById("exponents").value;
+  const x = document.getElementById("xValue").value;
+
+  document.getElementById("polynomialFuncResult").value = polynomialFunction(coefficients, exponents, x);//
+  document.getElementById("polynomialEvalResult").value = null;//
 });
