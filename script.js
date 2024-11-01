@@ -148,14 +148,6 @@ const polynomialEvaluation = (coeff, exp, x) => {
   const coeffArray = coeff.split(" ");
   const expArray = exp.split(" ");
 
-  const coeffMap = coeffArray.map((coeff) => {
-    return Number(coeff);
-  });
-
-  const expMap = expArray.map((exp) => {
-    return Number(exp);
-  });
-
   let answer = 0;
 
   for (let i = 0; i < coeffArray.length; i++) {
@@ -163,7 +155,6 @@ const polynomialEvaluation = (coeff, exp, x) => {
   }
 
   return answer;
-  console.log(coeffMap, expMap);
 };
 
 document
