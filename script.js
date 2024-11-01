@@ -59,27 +59,6 @@ function ambiguousCase(angleA, a, b) {
     return "Invalid angle.";
   }
 }
-  /*if (angleA <= 90) {
-    console.log("a: " + a + " h: " + h);
-    if (a < h) {
-      return "No triangle.";
-    } else if (a == h) {
-      // a === h for type as well
-      return "Right triangle.";
-    } else if (a > h && a != h) {
-      return "One triangle.";
-    } else if (a > h && a < b) {
-      return "Two triangles (ambiguous case).";
-    } else {
-      return "No solution.";
-    }
-  } else if (angleA <= 180 && angleA > 90) {
-    if (a < h || a == b) {
-      return "No triangle.";
-    }
-  } else {
-    return "No solution.";
-  }*/
 
 //Add event listener to ambiguous case ID
 document
@@ -114,29 +93,6 @@ const newtonsMethod = (g) => {
   function fDeriv(x) {
     return 24 * x ** 3 - 39 * x ** 2 - 36 * x + 7;
   }
-
-  do {
-    g = g - f(g) / fDeriv(g);
-  } while (Math.abs(f(g) > 0.00001));
-  return g;
-
-  //old code, less efficient!
-  do {
-    const rootApprox = (x) => {
-      newRoot = x - f(x) / fDeriv(x);
-      return newRoot;
-    };
-
-    if (Math.abs(previousGuess - rootApprox(previousGuess) > 0.0000001)) {
-      previousGuess = rootApprox(newRoot);
-    } else {
-      rootGuess = true;
-      return rootApprox(previousGuess);
-    }
-  } while (rootGuess == false);
-  //  while (differenceTracker > 0.01) {
-  //    rootApprox(g)
-  //  }
 };
 
 document
@@ -180,7 +136,6 @@ const polynomialFunction = (coeff, exp) => {
 
   return answer;
 
-  //return coeffMap[0] + expMap[0] + coeffMap[1] + expMap[1] + coeffMap[2] + expMap[2];
 };
 
 const polynomialEvaluation = (coeff, exp, x) => {
@@ -200,12 +155,6 @@ const polynomialEvaluation = (coeff, exp, x) => {
   for (let i = 0; i < coeffArray.length; i++) {
     answer += Number(coeffArray[i]) * (x ** Number(expArray[i]));
   }
-
-  //old code, less efficient
-  //const answer =
-  //  coeffMap[0] * x ** expMap[0] +
-  //  coeffMap[1] * x ** expMap[1] +
-  //  coeffMap[2] * x ** expMap[2];
 
   return answer;
   console.log(coeffMap, expMap);
