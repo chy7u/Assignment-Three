@@ -53,8 +53,8 @@ function ambiguousCase(angleA, a, b) {
         return "No triangle.";
       } else if (a > b) {
         return "One triangle.";
-      } 
-    } 
+      }
+    }
   } else {
     return "Invalid angle.";
   }
@@ -69,8 +69,6 @@ document
     const a = document.getElementById("sideAA").value;
     const b = document.getElementById("sideBA").value;
 
-    //FROM CHATGPT: NaN "not a number", this function returns true
-    //when any input is NaN.., checks valid numbers before calculating
     if (angleA <= 0 || angleA >= 180 || b <= 0 || a <= 0) {
       alert("Please enter valid numbers for angle and sides.");
       return;
@@ -93,6 +91,12 @@ const newtonsMethod = (g) => {
   function fDeriv(x) {
     return 24 * x ** 3 - 39 * x ** 2 - 36 * x + 7;
   }
+
+  do {
+    g = g - f(g) / fDeriv(g);
+  } while (Math.abs(f(g) > 0.00001));
+  return g;
+
 };
 
 document
@@ -116,14 +120,16 @@ const polynomialFunction = (coeff, exp) => {
   //mapping function that goes through the array
   //and adds the + or - sign in front of the coefficient as necessary,
   //also ignores the sign if it is the leading coefficient
+  var a = false;
   const coeffMap = coeffArray.map((coeff) => {
-    if (coeff == coeffArray[0] || coeff < 0) {
+    if (coeff == coeffArray[0] && !a) {
+      a = true;
       return coeff;
     } else {
-      if (coeff > 0) {
+      if (coeff >= 0) {
         return "+" + coeff;
       } else {
-        return "+0";
+        return coeff;
       }
     }
   });
