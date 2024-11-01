@@ -42,7 +42,7 @@ function ambiguousCase(angleA, a, b) {
     } else if (a == h) {
       // a === h for type as well
       return "Right triangle.";
-    } else if (a > h) {
+    } else if (a > h && a != h) {
       return "One triangle.";
     } else if (a > h && a < b) {
       return "Two triangles (ambiguous case).";
@@ -50,7 +50,7 @@ function ambiguousCase(angleA, a, b) {
       return "No solution.";
     }
   } else if (angleA <= 180) {
-    if (a < h || a == h) {
+    if (a < h || a == b) {
       return "No triangle.";
     }
     return "One triangle.";
@@ -134,38 +134,66 @@ document
 //Polynomial Function
 
 const polynomialFunction = (coeff, exp) => {
-
   const coeffArray = coeff.split(" ");
   const expArray = exp.split(" ");
-  
+
   const expMap = expArray.map((exp) => {
     return "x^" + exp;
   });
 
+  //mapping function that goes through the array
+  //and adds the + or - sign in front of the coefficient as necessary,
+  //also ignores the sign if it is the leading coefficient
   const coeffMap = coeffArray.map((coeff) => {
-    if (coeff == coeffArray[0]) {
+    if (coeff == coeffArray[0] || coeff < 0) {
       return coeff;
     } else {
       if (coeff > 0) {
         return "+" + coeff;
-      } else if (coeff <0) {
-        return "-" + coeff;
       } else {
-        return "0";
+        return "+0";
       }
     }
-
   });
 
-  console.log(coeffArray, expArray, expMap, coeffMap);
-
+  const polynomialOutput =
+    coeffMap[0] + expMap[0] + coeffMap[1] + expMap[1] + coeffMap[2] + expMap[2];
+  return polynomialOutput;
 };
 
-document.getElementById("calculatePolynomial").addEventListener("click", function() {
-  const coefficients = document.getElementById("coefficients").value;
-  const exponents = document.getElementById("exponents").value;
-  const x = document.getElementById("xValue").value;
+const polynomialEvaluation = (coeff, exp, x) => {
+  const coeffArray = coeff.split(" ");
+  const expArray = exp.split(" ");
 
-  document.getElementById("polynomialFuncResult").value = polynomialFunction(coefficients, exponents, x);//
-  document.getElementById("polynomialEvalResult").value = null;//
-});
+  const coeffMap = coeffArray.map((coeff) => {
+    return Number(coeff);
+  });
+
+  const expMap = expArray.map((exp) => {
+    return Number(exp);
+  });
+
+  const answer =
+    coeffMap[0] * x ** expMap[0] +
+    coeffMap[1] * x ** expMap[1] +
+    coeffMap[2] * x ** expMap[2];
+
+  return answer;
+  console.log(coeffMap, expMap);
+};
+
+document
+  .getElementById("calculatePolynomial")
+  .addEventListener("click", function () {
+    const coefficients = document.getElementById("coefficients").value;
+    const exponents = document.getElementById("exponents").value;
+    const x = document.getElementById("xValue").value;
+
+    document.getElementById("polynomialFuncResult").value = polynomialFunction(
+      coefficients,
+      exponents,
+      x
+    ); //
+    document.getElementById("polynomialEvalResult").value =
+      polynomialEvaluation(coefficients, exponents, x); //
+  });
